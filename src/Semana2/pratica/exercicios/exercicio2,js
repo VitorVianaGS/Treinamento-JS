@@ -1,0 +1,37 @@
+// 1ª - Transforme o exercício1 em uma função
+
+async function mediaNotas(
+    bibliotecaPromises = import("node:readline/promises")
+){
+    const readline = await bibliotecaPromises;
+    const {stdin: input, stdout: output} = process;
+    const rl = readline.createInterface({input, output});
+
+    const qtdNotas = parseFloat(
+        await rl.question(`Quantidade de notas a declarar: `)
+    );
+
+    let listaNotas = []
+    let cont = 1
+    let soma = 0
+
+    while(cont <= qtdNotas){
+
+        const notas = parseFloat(
+            await rl.question(`Digite a ${cont}ª nota: `)
+        );
+        
+        listaNotas.push(notas);
+        cont++;
+        soma += notas;
+    }
+
+    const media = soma / qtdNotas;
+
+    rl.close();
+
+    return console.log(`A média das notas é: ${media}`);
+}
+
+mediaNotas();
+
